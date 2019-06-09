@@ -52,7 +52,7 @@ elseif(fs >= 16000)
     name = substr(filename, 1, -4);
     [tok, rem] = strtok(name, "/");
     name = rem(2:end);
-    audiowrite(strcat(substr(name,1,-4),"_trimmed_",num2str(time1),"-",num2str(time2),".wav"), rs, fs, 'Quality', 100);
+    audiowrite(strcat(name,"_trimmed_",num2str(time1),"-",num2str(time2),".wav"), rs, fs, 'Quality', 100);
   disp("File successfully trimmed!")
   endif
 endif
