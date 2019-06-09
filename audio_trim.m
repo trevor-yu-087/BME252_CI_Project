@@ -27,8 +27,9 @@
 ## time2 is end time in seconds
 
 function retval = audio_trim (filename, time1, time2)
-[y,fs] = audioread(strcat("/audiofiles/",filename));
-disp(strcat("Trimming ", filename, " from ", time1, "s to ", time2, "s.")
+[y,fs] = audioread(strcat("audiofiles/",filename));
+disp(size(y))
+disp(strcat("Trimming ", filename, " from ", num2str(time1), "s to ", num2str(time2), "s."))
 %% Convert to Mono
 if(size(y)(2) == 2)
   mono = y(1:end,1) + y(1:end,2);
@@ -36,25 +37,20 @@ else
   mono = y;
 endif
 %% Downsample to 16 kHz
-if(fs > 16000)
+if(fs < 16000)
+  disp("Signal is below 16 kHz. Find a new Signal.")
+elseif(fs >= 16000)
   [rs, h] = resample(mono, 16000, fs);  
   fs = 16000;
-elseif(fs < 16000)
-  disp("Signal is below 16 kHz. Find a new Signal.")
-  endfunction
+  %% Trim signal to new size
+  if(time1 >= time2 )
+    disp("Start and end times invalid, please re-enter times.")
+  elseif(fs*time2 > size(rs))
+    disp("End time beyond duration of sound, please re=enter time.")
+  else 
+    rs = rs(time1*fs+1:time2*fs);
+    audiowrite(strcat(substr(filename,1,-4),"_trimmed_",num2str(time1),"-",num2str(time2),".wav"), rs, fs, 'Quality', 100);
+  disp("File successfully trimmed!")
+  endif
 endif
-%% Trim signal to new size
-if(time1 >= time 2 )
-  disp("Start and end times invalid, please re-enter times.")
-  endfunction
-if(fs*time2 > size(mono))
-  disp("End time beyond duration of sound, please re=enter time.")
-  endfunction
-else 
-  mono = mono(time1*fs+1, time2*fs);
-endif
-audiowrite(strcat(filename,"_trimmed_",time1,"-",time2,".wav"), mono, fs, 'Quality', 100);
-disp("File successfully trimmed!")
-% sound(mono,fs)
-
 endfunction
