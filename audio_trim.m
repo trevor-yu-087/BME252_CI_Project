@@ -49,7 +49,10 @@ elseif(fs >= 16000)
     disp("End time beyond duration of sound, please re=enter time.")
   else 
     rs = rs(time1*fs+1:time2*fs);
-    audiowrite(strcat(substr(filename,1,-4),"_trimmed_",num2str(time1),"-",num2str(time2),".wav"), rs, fs, 'Quality', 100);
+    name = substr(filename, 1, -4);
+    [tok, rem] = strtok(name, "/");
+    name = rem(2:end);
+    audiowrite(strcat(substr(name,1,-4),"_trimmed_",num2str(time1),"-",num2str(time2),".wav"), rs, fs, 'Quality', 100);
   disp("File successfully trimmed!")
   endif
 endif
