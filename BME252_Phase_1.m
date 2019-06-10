@@ -10,7 +10,7 @@ else
   mono = y;
 endif
 %% 3.3 Play the sound in Octave
-#sound(mono, sample_rate)
+sound(mono, sample_rate)
 %% 3.4 Write the sound to a new file
 newfilename = substr(filename, 1, -4);
 [tok, rem] = strtok(newfilename, "/");
@@ -33,7 +33,7 @@ endif
 f = 1000;
 t = (1:size(rs))/sample_rate;
 cosfunction = cos(2*pi*f*t);
-#sound(t,costfunction)
+sound(t,costfunction)
 cosfunction = cosfunction(1: (sample_rate/f)*2);  
 t = t(1:(sample_rate/1000)*2);
 figure (2);
