@@ -26,6 +26,7 @@ amplitudeModulatedSignals = cosWaves .* envelopedSignal;
 output = sum(amplitudeModulatedSignals');
 output = output/max(output);
 plot(t, output)
+plotFFT(output,16000)
 soundsc(output, 16000)
 name = fileName(1:end-4);
 name = strcat(name,'_filtered.wav')
