@@ -15,8 +15,8 @@ Fs     = 16000;
 b  = firpm(N, [0 Fstop1 Fpass1 Fpass2 Fstop2 Fs/2]/(Fs/2), [0 0 1 1 0 ...
            0], [Wstop1 Wpass Wstop2], {dens});
 Filters = [dfilt.dffir(b)];
-for i = 2:size(A, 2)
-   b  = firpm(N, [0 A(1,i) A(2,i) A(3,i) A(4,i) Fs/2]/(Fs/2), [0 0 1 1 0 ...
+for i = 2:size(A, 1)
+   b  = firpm(N, [0 A(i,1) A(i,2) A(i,3) A(i,4) Fs/2]/(Fs/2), [0 0 1 1 0 ...
            0], [Wstop1 Wpass Wstop2], {dens});
    Filters = cat(2, Filters, [dfilt.dffir(b)]);
 end
