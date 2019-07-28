@@ -2,7 +2,7 @@ function filterBank = IIR_Filter_Bank(freqs,order,type,stopgain)
 % type can be 'butter', 'ellip', 'cheby1', or 'cheby2'
 close all;
 %%
-dim = size(freqs)      % Dimensions of freqs matrix
+dim = size(freqs);      % Dimensions of freqs matrix
 %%
 Fs1 = freqs(:,1);    % Lower Stop Frequency
 Fp1 = freqs(:,2);    % Lower Pass Frequency

@@ -2,7 +2,7 @@ function plotFFT(y, fs)
 %close all;
 Y = fft(y);
 len = size(y);
-L = len(1)
+L = max(len);
 %%
 doublespec = abs(Y/L);
 singlespec = doublespec(1:L/2 +1);
