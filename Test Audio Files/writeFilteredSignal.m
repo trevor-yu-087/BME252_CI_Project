@@ -1,4 +1,4 @@
-function writeFilteredSignal(fileName, filterBank, centreFrequencies)
+function writeFilteredSignal(fileName, filterBank, centreFrequencies,newNameIndex)
 
 % Read the audio sample and filter 
 [y1,fs] = audioread(fileName);
@@ -25,9 +25,12 @@ amplitudeModulatedSignals = cosWaves .* envelopedSignal;
 %%
 output = sum(amplitudeModulatedSignals');
 output = output/max(output);
-plot(t, output)
-soundsc(output, 16000)
-name = fileName(1:end-4);
-name = strcat(name,'_filtered.wav')
-audiowrite(name, output, 16000);
+%plot(t, output)
+%plotFFT(output, 16000)
+%soundsc(output, 16000)
+name = convertStringsToChars(fileName);
+name = name(1:end-4);
+newFile = strcat('TestSignals/',name, '_', int2str(newNameIndex), '_filtered.wav');
+newFile = convertStringsToChars(newFile);
+audiowrite(newFile, output, 16000);
 end
