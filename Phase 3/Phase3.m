@@ -94,6 +94,7 @@ end
 function Frequencies = LogScale(N, Start, End, Coverage, Wing)
     A = zeros(N, 5);
     ScalingFactor = End/Start;
+    % Put into A -> (Stop1, Pass1, Pass2, Stop2)
     for i = 0:(N-1)
        left = Start * ScalingFactor^(i/N);
        right = Start * ScalingFactor^((i+1)/N);
@@ -104,6 +105,7 @@ function Frequencies = LogScale(N, Start, End, Coverage, Wing)
        A(i + 1, 1) = start * (start/stop)^Wing;
        A(i + 1, 4) = stop * (stop/start)^Wing;
     end
+    %find Centre Frequencies
     A(:, 5) = (A(:, 2) .* A(:, 3)).^0.5;
 Frequencies = A;
 end
